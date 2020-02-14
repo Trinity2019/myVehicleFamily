@@ -9,21 +9,19 @@ class Vehicle
 {
 public:
 
-
     // basic constructor
     Vehicle();
 
     virtual ~Vehicle() = default;
 
-    virtual void
-        ShowFeatures() = 0;
+    virtual void ShowFeatures() = 0;
 
     // This is just example
-    // Can return Scorpion::SmartPointer type pointing to Vehicle to fit into other project
+    // Can return other pointer or smart pointer type pointing to Vehicle to fit into other project
     static std::unique_ptr<Vehicle> getVehicle(std::string vehicleLocation);
 
 protected:
-
+    // Can only be seen by child classes
     std::string get_common_feature(void) { return basic_feature; }
 
 private:
@@ -41,7 +39,6 @@ public:
     {
         printf("%s\n", (get_common_feature() + my_feature).c_str());
     }
-
 };
 
 class Truck : public Vehicle
@@ -77,6 +74,27 @@ Vehicle::Vehicle() : basic_feature("I have 4 wheels. ")
 {
 }
 
+// If there's new vehicle type added, all you need to do is add another vehicle class and then add an "else if" case in this function
+std::unique_ptr<Vehicle> Vehicle::getVehicle(std::string vehicleLocation)
+{
+    std::unique_ptr<Vehicle> p = nullptr;
+
+    if (vehicleLocation == R"(CALIFORNIA)")
+    {
+        p = std::make_unique<Sedan>();
+    }
+    else if (vehicleLocation == R"(TEXAS)")
+    {
+        p = std::make_unique<Truck>();
+    }
+    else if (vehicleLocation == R"(VIRGINIA)")
+    {
+        p = std::make_unique<SUV>();
+    }
+
+    return p;
+}
+
 Sedan::Sedan() : my_feature("Sedan is small, lightweight, fuel economic cars for daily driving needs.")
 {
 }
@@ -89,38 +107,15 @@ Truck::Truck() : my_feature("Truck is larger, usually for tow and haul, as well 
 {
 }
 
-std::unique_ptr<Vehicle> Vehicle::getVehicle(std::string vehicleLocation)
-{
-    std::unique_ptr<Vehicle> p = nullptr;
 
-    if (vehicleLocation == R"(CA)") {
-
-        p = std::make_unique<Sedan>();
-
-    }
-    else if (vehicleLocation == R"(TEXAS)") {
-
-        p = std::make_unique<Truck>();
-
-    }
-    else if (vehicleLocation == R"(VA)") {
-
-        p = std::make_unique<SUV>();
-
-    }
-
-
-    return p;
-}
 int main()
 {
-    auto vehicle1 = Vehicle::getVehicle("VA");
-    auto vehicle2 = Vehicle::getVehicle("CA");
+    auto vehicle1 = Vehicle::getVehicle("VIRGINIA");
+    auto vehicle2 = Vehicle::getVehicle("CALIFORNIA");
     auto vehicle3 = Vehicle::getVehicle("TEXAS");
 
     vehicle1->ShowFeatures();
     vehicle2->ShowFeatures();
     vehicle3->ShowFeatures();
     return 0;
-
 }
