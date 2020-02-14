@@ -17,7 +17,7 @@ public:
     virtual void ShowFeatures() = 0;
 
     // This is just example
-    // Can return other pointer or smart pointer type pointing to Vehicle to fit into other project
+    // Can return "Vehicle *" or other smart pointer type pointing to Vehicle
     static std::unique_ptr<Vehicle> getVehicle(std::string vehicleLocation);
 
 protected:
