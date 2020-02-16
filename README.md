@@ -7,7 +7,7 @@ The caller accesses vehicle through the base class interface(Vehicle) and do not
 
 Results:
 ```
-I have 4 wheels. SUV is for driving over rough terrains. They usually offer all-wheel drive which is beneficial in difficult weathers.
-I have 4 wheels. Sedan is small, lightweight, fuel economic cars for daily driving needs.
-I have 4 wheels. Truck is larger, usually for tow and haul, as well as flexible.
+I am SUV in VIRGINIA. I have 4 wheels. SUV is for driving over rough terrains. They usually offer all-wheel drive which is beneficial in difficult weathers.
+I am Sedan in CALIFORNIA. I have 4 wheels. Sedan is small, lightweight, fuel economic cars for daily driving needs.
+I am Truck in TEXAS. I have 4 wheels. Truck is larger, usually for tow and haul, as well as flexible.
 ```
